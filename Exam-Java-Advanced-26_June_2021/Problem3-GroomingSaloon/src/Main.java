@@ -34,7 +34,7 @@ public class Main {
 // Get Statistics
         System.out.println(salon.getStatistics());
         String str = salon.getStatistics();
-        System.out.println();
+        System.out.println(str);
 // The grooming salon has the following clients:
 //Bella Mia
 //Zak Jon

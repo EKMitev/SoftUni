@@ -1,7 +1,7 @@
 public class Pet {
-    private String name;
-    private int age;
-    private String owner;
+    private final String name;
+    private final int age;
+    private final String owner;
 
     public Pet(String name, int age, String owner) {
         this.name = name;

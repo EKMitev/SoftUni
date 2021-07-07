@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GroomingSalon {
-    private int capacity;
-    private List<Pet> data;
+    private final int capacity;
+    private final List<Pet> data;
 
     public GroomingSalon(int capacity) {
         this.capacity = capacity;

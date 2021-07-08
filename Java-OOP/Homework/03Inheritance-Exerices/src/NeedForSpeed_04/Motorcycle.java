@@ -1,4 +1,4 @@
-package needForSpeed;
+package NeedForSpeed_04;
 
 public class Motorcycle extends Vehicle{
 

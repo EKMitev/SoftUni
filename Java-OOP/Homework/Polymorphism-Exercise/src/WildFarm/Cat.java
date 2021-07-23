@@ -23,7 +23,13 @@ public class Cat extends Felime {
 
     @Override
     public String toString() {
-        DecimalFormat decimalFormat = new DecimalFormat("##.#");
-        return String.format("%s[%s, %s, %s, %s, %d]", this.animalType, this.animalName, this.breed, decimalFormat.format(this.animalWeight), this.livingRegion, this.foodEaten).trim();
+        DecimalFormat decimalFormat = new DecimalFormat("##.##");
+        return String.format("%s[%s, %s, %s, %s, %d]",
+                this.animalType,
+                this.animalName,
+                this.breed,
+                decimalFormat.format(this.animalWeight),
+                this.livingRegion,
+                this.foodEaten).trim();
     }
 }

@@ -13,4 +13,4 @@ function walk(a, b, c) {
 
     console.log((hours < 10 ? "0" : "") + hours + ":" + (minutes < 10 ? "0" : "") + (minutes) + ":" + (seconds < 10 ? "0" : "") + seconds);
 }
-walk(9000, 0.6, 5)
+walk(4000, 0.6, 5)

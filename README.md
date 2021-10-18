@@ -1,3 +1,3 @@
 # SoftUni-Java
-<img src="https://upload.wikimedia.org/wikipedia/commons/7/76/Logo_Software_University_%28SoftUni%29_-_blue.png" alt="logo">
+<img src="https://radoslavstanchev.github.io/Dark-Landing-Page/images/software-university-logo.png" alt="logo">
 Exercises and Exams from SoftUni - Java and JS

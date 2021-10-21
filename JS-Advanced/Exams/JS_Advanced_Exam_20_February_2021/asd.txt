@@ -1,0 +1,3 @@
+'Title: My Story\nCreator: Anny\nLikes: 3\nComments:\n-- 1. Anny: Some Content\n--- 1.1. Ammy: New Content\n-- 3. Jessy: Nice :)\n-- 2. Zane: Reply\n--- 2.1. SAmmy: Reply@' 
+to equal 
+'Title: My Story\nCreator: Anny\nLikes: 3\nComments:\n-- 1. Anny: Some Content\n--- 1.1. Ammy: New Content\n-- 2. Zane: Reply\n--- 2.1. SAmmy: Reply@\n-- 3. Jessy: Nice :)'

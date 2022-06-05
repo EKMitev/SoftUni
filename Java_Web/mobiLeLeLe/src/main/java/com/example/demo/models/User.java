@@ -32,7 +32,7 @@ public class User {
     @Column(name = "image_url")
     private String imageURL;
 
-    private Instant created;
+    private Instant created = Instant.now();
 
     public long getId() {
         return id;

@@ -1,16 +1,27 @@
 package com.example.demo.service;
 
+import com.example.demo.CurrentUser;
 import com.example.demo.models.User;
+import com.example.demo.models.dto.UserLoginDTO;
 import com.example.demo.models.dto.UserRegDTO;
 import com.example.demo.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class AuthService {
+    private final Logger LOGGER = LoggerFactory.getLogger(AuthService.class);
 
-    private UserRepository userRepository;
+    private final CurrentUser currentUser;
 
-    public AuthService(UserRepository userRepository) {
+    private final UserRepository userRepository;
+
+    public AuthService(CurrentUser currentUser,
+                       UserRepository userRepository) {
+        this.currentUser = currentUser;
         this.userRepository = userRepository;
     }
 
@@ -23,5 +34,29 @@ public class AuthService {
                 .setPassword(userRegDTO.getPassword());
 
         this.userRepository.save(user);
+        login(user);
+    }
+
+    public void login(UserLoginDTO userLoginDTO) {
+        Optional<User> userOpt = this.userRepository.findByUsername(userLoginDTO.getUsername());
+
+        if (userOpt.isEmpty()) {
+            LOGGER.info("Invalid user {}", userLoginDTO.getUsername());
+            return;
+        }
+
+       if (userLoginDTO.getPassword().equals(userOpt.get().getPassword())) {
+           login(userOpt.get());
+       }
+    }
+
+    private void login(User user) {
+        this.currentUser
+                .setLoggedIn(true)
+                .setName(user.getFirstName() + " " + user.getLastName());
+    }
+
+    public void logout() {
+        this.currentUser.clear();
     }
 }

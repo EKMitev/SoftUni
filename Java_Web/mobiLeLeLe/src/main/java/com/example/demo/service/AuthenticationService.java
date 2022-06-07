@@ -12,15 +12,15 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class AuthService {
-    private final Logger LOGGER = LoggerFactory.getLogger(AuthService.class);
+public class AuthenticationService {
+    private final Logger LOGGER = LoggerFactory.getLogger(AuthenticationService.class);
 
     private final CurrentUser currentUser;
 
     private final UserRepository userRepository;
 
-    public AuthService(CurrentUser currentUser,
-                       UserRepository userRepository) {
+    public AuthenticationService(CurrentUser currentUser,
+                                 UserRepository userRepository) {
         this.currentUser = currentUser;
         this.userRepository = userRepository;
     }

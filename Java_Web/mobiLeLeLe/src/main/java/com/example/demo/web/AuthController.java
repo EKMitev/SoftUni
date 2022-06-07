@@ -2,19 +2,30 @@ package com.example.demo.web;
 
 import com.example.demo.models.dto.UserLoginDTO;
 import com.example.demo.models.dto.UserRegDTO;
-import com.example.demo.service.AuthService;
+import com.example.demo.service.AuthenticationService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/users")
 public class AuthController {
-    private AuthService authService;
+    private final AuthenticationService authenticationService;
 
-    public AuthController(AuthService authService) {
-        this.authService = authService;
+    public AuthController(AuthenticationService authenticationService) {
+        this.authenticationService = authenticationService;
+    }
+
+    @ModelAttribute("userModel")
+    public void initUserModel(Model model) {
+        model.addAttribute("userModel", new UserRegDTO());
     }
 
     @GetMapping("/register")
@@ -23,9 +34,18 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(UserRegDTO userRegDTO) {
-        authService.register(userRegDTO);
+    public String register(@Valid UserRegDTO userModel,
+                           BindingResult bindingResult,
+                           RedirectAttributes redirectAttributes) {
 
+        if (bindingResult.hasErrors()) {
+
+            redirectAttributes.addFlashAttribute("userModel", userModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userModel", bindingResult);
+            return "redirect:/users/register";
+        }
+
+        authenticationService.register(userModel);
         return "redirect:/";
     }
 
@@ -36,14 +56,14 @@ public class AuthController {
 
     @PostMapping("/login")
     public String login(UserLoginDTO userLoginDTO) {
-        this.authService.login(userLoginDTO);
+        this.authenticationService.login(userLoginDTO);
 
         return "redirect:/";
     }
 
     @GetMapping("/logout")
     public String logout() {
-        this.authService.logout();
+        this.authenticationService.logout();
         return "redirect:/";
     }
 }

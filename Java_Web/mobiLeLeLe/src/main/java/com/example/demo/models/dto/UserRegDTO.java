@@ -1,11 +1,32 @@
 package com.example.demo.models.dto;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class UserRegDTO {
 
+    @NotBlank
+    @NotEmpty
+    @Size(min = 2, max = 20)
     private String username;
+
+    @NotBlank
+    @NotEmpty
+    @Size(min = 2, max = 20)
     private String firstName;
+
+    @NotBlank
+    @NotEmpty
+    @Size(min = 2, max = 20)
     private String lastName;
+
+    @NotBlank
+    @NotEmpty
+    @Size(min = 5)
     private String password;
+    @NotBlank
+    @NotEmpty
     private String confirmPassword;
 
     public String getUsername() {

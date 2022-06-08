@@ -37,17 +37,18 @@ public class AuthenticationService {
         login(user);
     }
 
-    public void login(UserLoginDTO userLoginDTO) {
+    public boolean login(UserLoginDTO userLoginDTO) {
         Optional<User> userOpt = this.userRepository.findByUsername(userLoginDTO.getUsername());
 
         if (userOpt.isEmpty()) {
             LOGGER.info("Invalid user {}", userLoginDTO.getUsername());
-            return;
+            return false;
         }
 
        if (userLoginDTO.getPassword().equals(userOpt.get().getPassword())) {
            login(userOpt.get());
        }
+       return true;
     }
 
     private void login(User user) {

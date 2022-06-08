@@ -1,7 +1,12 @@
 package com.example.demo.models.dto;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class UserLoginDTO {
 
+    @NotEmpty
+    @Size(min=2, max = 20)
     private String username;
     private String password;
 

@@ -6,10 +6,7 @@ import com.example.demo.service.AuthenticationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
@@ -24,8 +21,8 @@ public class AuthController {
     }
 
     @ModelAttribute("userModel")
-    public void initUserModel(Model model) {
-        model.addAttribute("userModel", new UserRegDTO());
+    public UserRegDTO initUserModel() {
+        return new UserRegDTO();
     }
 
     @GetMapping("/register")
@@ -50,13 +47,19 @@ public class AuthController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
         return "auth-login";
     }
 
     @PostMapping("/login")
-    public String login(UserLoginDTO userLoginDTO) {
-        this.authenticationService.login(userLoginDTO);
+    public String login(UserLoginDTO userLoginDTO,
+                        RedirectAttributes redirectAttributes) {
+        boolean logged = this.authenticationService.login(userLoginDTO);
+
+        if(!logged) {
+            redirectAttributes.addFlashAttribute("err", true);
+            return "redirect:/users/login";
+        }
 
         return "redirect:/";
     }

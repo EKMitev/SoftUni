@@ -1,7 +1,8 @@
-package com.example.demo.models;
+package com.example.demo.models.entity;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.List;
 
 @Entity
 @Table(name = "brands")
@@ -14,11 +15,22 @@ public class Brand {
     @Column(nullable = false, unique = true)
     private String name;
 
-    private Instant created;
+    private Instant created = Instant.now();
 
-    private Instant modified;
+    private Instant modified = Instant.now();
+
+    @OneToMany(mappedBy = "brand")
+    private List<Model> models;
 
     public Brand() {
+    }
+
+    public List<Model> getModels() {
+        return models;
+    }
+
+    public void setModels(List<Model> models) {
+        this.models = models;
     }
 
     public long getId() {

@@ -7,8 +7,18 @@ import org.springframework.web.context.annotation.SessionScope;
 @SessionScope
 public class CurrentUser {
 
+    private String userName;
     private String name;
     private boolean loggedIn;
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public CurrentUser setUserName(String userName) {
+        this.userName = userName;
+        return this;
+    }
 
     public String getName() {
         return name;

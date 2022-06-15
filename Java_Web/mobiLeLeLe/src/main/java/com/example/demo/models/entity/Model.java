@@ -1,4 +1,4 @@
-package com.example.demo.models;
+package com.example.demo.models.entity;
 
 import com.example.demo.models.enums.Category;
 
@@ -26,11 +26,11 @@ public class Model {
     private int startYear;
 
     @Column(name = "end_year")
-    private int endYear;
+    private Integer endYear;
 
-    private Instant created;
+    private Instant created = Instant.now();
 
-    private Instant modified;
+    private Instant modified= Instant.now();
 
     @ManyToOne(optional = false)
     private Brand brand;
@@ -83,11 +83,11 @@ public class Model {
         return this;
     }
 
-    public int getEndYear() {
+    public Integer getEndYear() {
         return endYear;
     }
 
-    public Model setEndYear(int endYear) {
+    public Model setEndYear(Integer endYear) {
         this.endYear = endYear;
         return this;
     }

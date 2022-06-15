@@ -1,7 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.CurrentUser;
-import com.example.demo.mapper.UserMapper;
+import com.example.demo.models.mapper.UserMapper;
 import com.example.demo.models.entity.User;
 import com.example.demo.models.dto.UserLoginDTO;
 import com.example.demo.models.dto.UserRegDTO;
@@ -52,7 +52,8 @@ public class AuthenticationService {
     private void login(User user) {
         this.currentUser
                 .setLoggedIn(true)
-                .setName(user.getFirstName() + " " + user.getLastName());
+                .setName(user.getFirstName() + " " + user.getLastName())
+                .setUserName(user.getUsername());
     }
 
     public void logout() {

@@ -56,7 +56,7 @@ public class AuthController {
                         RedirectAttributes redirectAttributes) {
         boolean logged = this.authenticationService.login(userLoginDTO);
 
-        if(!logged) {
+        if (!logged) {
             redirectAttributes.addFlashAttribute("err", true);
             return "redirect:/users/login";
         }

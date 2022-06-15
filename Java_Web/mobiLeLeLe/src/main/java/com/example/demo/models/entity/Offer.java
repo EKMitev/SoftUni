@@ -1,4 +1,4 @@
-package com.example.demo.models;
+package com.example.demo.models.entity;
 
 import com.example.demo.models.enums.Engine;
 import com.example.demo.models.enums.Transmission;
@@ -35,9 +35,9 @@ public class Offer {
 
     private int year;
 
-    private Instant created;
+    private Instant created = Instant.now();
 
-    private Instant modified;
+    private Instant modified =Instant.now();
 
     @OneToOne(optional = false)
     private Model model;

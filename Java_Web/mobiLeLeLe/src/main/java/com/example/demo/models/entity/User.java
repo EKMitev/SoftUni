@@ -1,4 +1,4 @@
-package com.example.demo.models;
+package com.example.demo.models.entity;
 
 import javax.persistence.*;
 import java.time.Instant;

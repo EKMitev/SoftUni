@@ -1,4 +1,4 @@
-package com.example.demo.models;
+package com.example.demo.models.entity;
 
 import com.example.demo.models.enums.UserRoleEnum;
 

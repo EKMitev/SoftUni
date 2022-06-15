@@ -1,7 +1,8 @@
 package com.example.demo.service;
 
 import com.example.demo.CurrentUser;
-import com.example.demo.models.User;
+import com.example.demo.mapper.UserMapper;
+import com.example.demo.models.entity.User;
 import com.example.demo.models.dto.UserLoginDTO;
 import com.example.demo.models.dto.UserRegDTO;
 import com.example.demo.repository.UserRepository;
@@ -16,22 +17,18 @@ public class AuthenticationService {
     private final Logger LOGGER = LoggerFactory.getLogger(AuthenticationService.class);
 
     private final CurrentUser currentUser;
-
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     public AuthenticationService(CurrentUser currentUser,
-                                 UserRepository userRepository) {
+                                 UserRepository userRepository, UserMapper userMapper) {
         this.currentUser = currentUser;
         this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
     public void register(UserRegDTO userRegDTO) {
-        User user = new User()
-                .setActive(true)
-                .setUsername(userRegDTO.getUsername())
-                .setFirstName(userRegDTO.getFirstName())
-                .setLastName(userRegDTO.getLastName())
-                .setPassword(userRegDTO.getPassword());
+        User user = this.userMapper.mapDtoToUser(userRegDTO);
 
         this.userRepository.save(user);
         login(user);
@@ -47,8 +44,9 @@ public class AuthenticationService {
 
        if (userLoginDTO.getPassword().equals(userOpt.get().getPassword())) {
            login(userOpt.get());
+           return true;
        }
-       return true;
+       return false;
     }
 
     private void login(User user) {

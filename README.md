@@ -36,7 +36,7 @@
 ---
 &nbsp;
 
-### Cybersecurity
+## Cybersecurity
 ---
  - [Information Security Management](https://softuni.bg/trainings/3538/information-security-management-september-2021) - [Certificate](https://softuni.bg/certificates/details/117112/09959118)
  - [Open Source and Threat Intelligence](https://softuni.bg/trainings/3539/open-source-and-threat-intelligence-january-2022) - [Certificate](https://softuni.bg/certificates/details/127284/18fd45e5)

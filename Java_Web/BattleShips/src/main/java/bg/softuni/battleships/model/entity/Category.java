@@ -17,6 +17,10 @@ public class Category {
     @Column(columnDefinition = "text")
     private String description;
 
+    public Category(CategoryEnum name) {
+        this.name = name;
+    }
+
     public long getId() {
         return id;
     }

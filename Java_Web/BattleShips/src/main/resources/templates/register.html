@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -9,30 +9,7 @@
     <link rel="stylesheet" href="/css/style.css"/>
 </head>
 <body class="body-main">
-<header>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top  rounded">
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Login</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Register</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Add Ship</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/">Logout</a>
-                </li>
-            </ul>
-            <img width="50px" src="/images/ufo.png" alt="Ufo image">
-        </div>
-    </nav>
-</header>
+<header th:include="fragments/navbar.html"></header>
 <main role="main">
     <div class="jumbotron">
         <div class="container text-light ">
@@ -47,28 +24,41 @@
 
             <div class="col-md-6">
                 <div class="container bg-blur rounded p-5 mt-5 w-75">
-                    <form action="/users/register" method="POST"
+                    <form
+                            th:action="@{/register}"
+                            th:method="post"
+                            th:object="${registerModel}"
                           class=" text-center text-light">
                         <div class="form-group row">
                             <label for="username" class="col-sm-2 col-form-label">Username</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control"
+                                <input type="text"
+                                       class="form-control"
                                        id="username"
-                                       aria-describedby="usernameHelpInline" placeholder="Username">
+                                       aria-describedby="usernameHelpInline"
+                                       placeholder="Username"
+                                       th:errorclass="is-invalid"
+                                       th:field="*{username}"/>
                                 <small id="usernameHelpInline"
-                                       class="bg-danger text-light rounded">
-                                    Username length must be between 5 and 20 characters.
+                                       class="invalid-feedback bg-danger text-light rounded"
+                                       th:each="err : ${#fields.errors('username')}"
+                                       th:text="${err}">
+
                                 </small>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="fullName" class="col-sm-2 col-form-label">Full name</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control"
+                                <input type="text"
+                                       class="form-control"
                                        id="fullName"
-                                       aria-describedby="fullNameHelpInline" placeholder="Full name">
+                                       aria-describedby="fullNameHelpInline"
+                                       placeholder="Full name"
+                                       th:errorclass="is-invalid"
+                                       th:field="*{fullName}"/>
                                 <small id="fullNameHelpInline"
-                                       class="bg-danger text-light rounded">
+                                       class="invalid-feedback bg-danger text-light rounded">
                                     Enter valid full name.
                                 </small>
                             </div>
@@ -77,10 +67,13 @@
                             <label for="email" class="col-sm-2 col-form-label">Email</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="email"
-                                       aria-describedby="emailHelpInline" placeholder="email@example.com">
+                                       aria-describedby="emailHelpInline" placeholder="email@example.com"
+                                       th:errorclass="is-invalid"
+                                       th:field="*{email}"/>
                                 <small id="emailHelpInline"
-                                       class="bg-danger text-light rounded">
-                                    Enter valid email address.
+                                       class="invalid-feedback bg-danger text-light rounded"
+                                       th:each="err : ${#fields.errors('email')}"
+                                       th:text="${err}">
                                 </small>
                             </div>
                         </div>
@@ -89,9 +82,11 @@
                             <div class="col-sm-10">
                                 <input type="password" class="form-control"
                                        id="password"
-                                       aria-describedby="passwordHelpInline" placeholder="Password">
+                                       th:field="*{password}"
+                                       th:errorclass="is-invalid"
+                                       aria-describedby="passwordHelpInline" placeholder="Password"/>
                                 <small id="passwordHelpInline"
-                                       class="bg-danger text-light rounded">
+                                       class="invalid-feedback bg-danger text-light rounded">
                                     Password length must be more than 3 characters long.
                                 </small>
                             </div>
@@ -100,11 +95,15 @@
                             <label for="confirmPassword" class="col-sm-2 col-form-label">Confirm Password</label>
                             <div class="col-sm-10">
                                 <input type="password"
-                                       class="form-control" id="confirmPassword"
-                                       aria-describedby="confirmPasswordHelpInline" placeholder="Confirm Password">
+                                       class="form-control"
+                                       id="confirmPassword"
+                                       th:field="*{confirmPassword}"
+                                       th:errorclass="is-invalid"
+                                       aria-describedby="confirmPasswordHelpInline" placeholder="Confirm Password"/>
                                 <small
-                                       id="confirmPasswordHelpInline" class="bg-danger text-light rounded">
-                                    Password length must be more than 3 characters long.
+                                       id="confirmPasswordHelpInline"
+                                       class="invalid-feedback bg-danger text-light rounded">
+                                    Passwords do not match.
                                 </small>
                             </div>
                         </div>
@@ -120,3 +119,5 @@
 </footer>
 </body>
 </html>
+
+

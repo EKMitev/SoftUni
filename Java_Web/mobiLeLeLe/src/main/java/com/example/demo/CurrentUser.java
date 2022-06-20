@@ -46,4 +46,13 @@ public class CurrentUser {
         setLoggedIn(false);
         setName(null);
     }
+
+    @Override
+    public String toString() {
+        return "CurrentUser{" +
+                "userName='" + userName + '\'' +
+                ", name='" + name + '\'' +
+                ", loggedIn=" + loggedIn +
+                '}';
+    }
 }

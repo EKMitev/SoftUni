@@ -54,6 +54,8 @@ public class AuthenticationService {
                 .setLoggedIn(true)
                 .setName(user.getFirstName() + " " + user.getLastName())
                 .setUserName(user.getUsername());
+
+        System.out.println(this.currentUser);
     }
 
     public void logout() {

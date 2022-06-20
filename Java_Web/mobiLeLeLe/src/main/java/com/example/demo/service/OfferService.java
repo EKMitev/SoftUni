@@ -32,6 +32,7 @@ public class OfferService {
         Offer offer = this.offerMapper.mapDtoToOffer(offerDTO);
 
         //FIXME: user should be logged in
+        System.out.println(this.currentUser);
 
         User seller = this.userRepository.findByUsername(currentUser.getUserName())
                 .orElseThrow();

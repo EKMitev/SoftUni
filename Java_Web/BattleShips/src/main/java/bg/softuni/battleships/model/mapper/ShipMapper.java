@@ -1,20 +1,21 @@
 package bg.softuni.battleships.model.mapper;
 
+import bg.softuni.battleships.model.DTO.AddShipDTO;
 import bg.softuni.battleships.model.DTO.ShipDTO;
-import bg.softuni.battleships.model.entity.Category;
-import bg.softuni.battleships.model.entity.CategoryEnum;
 import bg.softuni.battleships.model.entity.Ship;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public abstract class ShipMapper {
 
-   public Ship mapFromShipDto(ShipDTO shipDTO) {
+   public Ship mapFromAddShipDto(AddShipDTO addShipDTO) {
 
         return new Ship()
-                .setName(shipDTO.getName())
-                .setPower(shipDTO.getPower())
-                .setHealth(shipDTO.getHealth())
-                .setCreated(shipDTO.getCreated());
+                .setName(addShipDTO.getName())
+                .setPower(addShipDTO.getPower())
+                .setHealth(addShipDTO.getHealth())
+                .setCreated(addShipDTO.getCreated());
     }
+
+    abstract public ShipDTO mapFromEntity(Ship ship);
 }

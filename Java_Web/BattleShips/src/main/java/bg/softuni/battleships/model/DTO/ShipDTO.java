@@ -1,37 +1,17 @@
 package bg.softuni.battleships.model.DTO;
 
-import bg.softuni.battleships.model.entity.CategoryEnum;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.validation.constraints.*;
-import java.time.LocalDate;
-
 public class ShipDTO {
-
-    @NotBlank
-    @Size(min = 2, max = 20)
+    private long id;
     private String name;
-
-    @Positive
     private long power;
-
-    @Positive
     private long health;
 
-    @PastOrPresent
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @NotNull
-    private LocalDate created;
-
-    @PositiveOrZero
-    private int category = -1;
-
-    public String getName() {
-        return name;
+    public long getId() {
+        return id;
     }
 
-    public ShipDTO setName(String name) {
-        this.name = name;
+    public ShipDTO setId(long id) {
+        this.id = id;
         return this;
     }
 
@@ -53,21 +33,12 @@ public class ShipDTO {
         return this;
     }
 
-    public LocalDate getCreated() {
-        return created;
+    public String getName() {
+        return name;
     }
 
-    public ShipDTO setCreated(LocalDate created) {
-        this.created = created;
-        return this;
-    }
-
-    public int getCategory() {
-        return category;
-    }
-
-    public ShipDTO setCategory(int category) {
-        this.category = category;
+    public ShipDTO setName(String name) {
+        this.name = name;
         return this;
     }
 }

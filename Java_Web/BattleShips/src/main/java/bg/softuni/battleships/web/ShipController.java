@@ -1,6 +1,6 @@
 package bg.softuni.battleships.web;
 
-import bg.softuni.battleships.model.DTO.ShipDTO;
+import bg.softuni.battleships.model.DTO.AddShipDTO;
 import bg.softuni.battleships.service.ShipService;
 import bg.softuni.battleships.session.CurrentUser;
 import org.springframework.stereotype.Controller;
@@ -24,8 +24,8 @@ public class ShipController {
     }
 
     @ModelAttribute("shipModel")
-    public ShipDTO initShipModel() {
-        return new ShipDTO();
+    public AddShipDTO initShipModel() {
+        return new AddShipDTO();
     }
 
     @GetMapping("/ships/add")
@@ -38,7 +38,7 @@ public class ShipController {
     }
 
     @PostMapping("/ships/add")
-    public String addShip(@Valid ShipDTO shipModel,
+    public String addShip(@Valid AddShipDTO shipModel,
                           BindingResult bindingResult,
                           RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {

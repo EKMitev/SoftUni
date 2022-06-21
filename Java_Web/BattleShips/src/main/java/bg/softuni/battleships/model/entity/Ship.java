@@ -49,7 +49,7 @@ public class Ship {
         return health;
     }
 
-    public Ship setHealth(int health) {
+    public Ship setHealth(long health) {
         this.health = health;
         return this;
     }
@@ -58,7 +58,7 @@ public class Ship {
         return power;
     }
 
-    public Ship setPower(int power) {
+    public Ship setPower(long power) {
         this.power = power;
         return this;
     }

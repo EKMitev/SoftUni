@@ -25,6 +25,10 @@ public class CurrentUser {
                 .setEmail(user.getEmail());
     }
 
+    public boolean isLogged(){
+        return this.getId() != null;
+    }
+
     public void clear() {
         this
                 .setId(null)

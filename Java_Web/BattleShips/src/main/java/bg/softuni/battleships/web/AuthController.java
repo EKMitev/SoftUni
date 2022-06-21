@@ -3,6 +3,7 @@ package bg.softuni.battleships.web;
 import bg.softuni.battleships.model.DTO.LoginDTO;
 import bg.softuni.battleships.model.DTO.RegisterDTO;
 import bg.softuni.battleships.service.AuthService;
+import bg.softuni.battleships.session.CurrentUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +18,11 @@ public class AuthController {
 
 
     private final AuthService authService;
+    private final CurrentUser currentUser;
 
-    public AuthController(AuthService authService) {
+    public AuthController(AuthService authService, CurrentUser currentUser) {
         this.authService = authService;
+        this.currentUser = currentUser;
     }
 
     @ModelAttribute("registerModel")
@@ -29,6 +32,10 @@ public class AuthController {
 
     @GetMapping("/register")
     public String submitRegister() {
+        if (this.currentUser.isLogged()) {
+            return "redirect:/home";
+        }
+
         return "register";
     }
 
@@ -44,8 +51,7 @@ public class AuthController {
 
         this.authService.register(registerModel);
 
-        System.out.println("here");
-        return "home";
+        return "redirect:/home";
     }
 
     @ModelAttribute("loginModel")
@@ -55,7 +61,11 @@ public class AuthController {
 
     @GetMapping("/login")
     public String login() {
-        return "redirect:/login";
+        if (this.currentUser.isLogged()) {
+            return "redirect:/home";
+        }
+
+        return "login";
     }
 
     @PostMapping("/login")
@@ -75,5 +85,13 @@ public class AuthController {
         }
 
         return "redirect:/home";
+    }
+
+    @GetMapping("/logout")
+    public String logout(){
+
+
+        this.authService.logout();
+        return "redirect:/";
     }
 }

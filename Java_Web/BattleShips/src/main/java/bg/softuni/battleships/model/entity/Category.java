@@ -17,6 +17,8 @@ public class Category {
     @Column(columnDefinition = "text")
     private String description;
 
+    public Category() {}
+
     public Category(CategoryEnum name) {
         this.name = name;
     }

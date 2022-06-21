@@ -14,9 +14,20 @@ public class HomeController {
     }
 
     @GetMapping("/")
-    public String indexPage(){
+    public String indexPage() {
+        if (this.currentUser.isLogged()) {
+            return "redirect:/home";
+        }
+
         return "index";
     }
 
+    @GetMapping("/home")
+    public String home() {
+        if (!this.currentUser.isLogged()) {
+            return "redirect:/login";
+        }
 
+        return "home";
+    }
 }

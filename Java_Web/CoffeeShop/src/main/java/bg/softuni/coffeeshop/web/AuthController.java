@@ -1,5 +1,6 @@
 package bg.softuni.coffeeshop.web;
 
+import bg.softuni.coffeeshop.model.dto.LoginDTO;
 import bg.softuni.coffeeshop.model.dto.RegisterDTO;
 import bg.softuni.coffeeshop.service.AuthService;
 import org.springframework.stereotype.Controller;
@@ -27,12 +28,11 @@ public class AuthController {
 
     @GetMapping("/register")
     public String register() {
-        return "register";
-    }
+        if (this.authService.hasSession()) {
+            return "redirect:/home";
+        }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
+        return "register";
     }
 
     @PostMapping("/register")
@@ -50,5 +50,45 @@ public class AuthController {
         this.authService.register(registerDTO);
 
         return "redirect:/home";
+    }
+
+    @ModelAttribute("loginDTO")
+    public LoginDTO initLoginDTO() {
+        return new LoginDTO();
+    }
+
+    @GetMapping("/login")
+    public String login() {
+        if (this.authService.hasSession()) {
+            return "redirect:/home";
+        }
+
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String login(@Valid LoginDTO loginDTO,
+                        BindingResult bindingResult,
+                        RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("loginDTO", loginDTO);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.loginDTO", bindingResult);
+
+            return "redirect:/login";
+        }
+
+        if (!this.authService.login(loginDTO)) {
+            redirectAttributes.addFlashAttribute("invalidCredentials", true);
+            return "redirect:/login";
+        }
+
+        return "redirect:/home";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        this.authService.logout();
+        return "redirect:/";
     }
 }

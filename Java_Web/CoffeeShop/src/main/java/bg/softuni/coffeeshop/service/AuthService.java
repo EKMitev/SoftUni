@@ -45,7 +45,7 @@ public class AuthService {
         this.currentUser.clear();
     }
 
-    public boolean isLogged() {
+    public boolean hasSession() {
         return this.currentUser.isLogged();
     }
 

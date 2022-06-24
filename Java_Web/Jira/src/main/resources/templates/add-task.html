@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>GIRA</title>
+    <link rel="icon" href="/img/projectLogo.png" type="image/icon type">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/reset-css.css">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="page-container">
+
+    <header th:include="fragments/nav"></header>
+
+    <main class="content-wrap">
+        <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add Task</span></h1>
+        <hr class="hr-3 w-25 bg-white"/>
+        <form th:method="post"
+              th:action="@{/tasks/add}"
+              th:object="${taskDTO}"
+              class="mx-auto w-25 bg-blur">
+            <div class="form-group">
+                <div class="label-holder textCol d-flex justify-content-center">
+                    <label for="name" class="h4 mb-2">Name</label>
+                </div>
+                <input th:field="*{name}"
+                       th:errorclass="is-invalid"
+                       type="text" class="form-control" id="name" name="name"/>
+                <small th:each="err : ${#fields.errors('name')}"
+                       th:text="${err}"
+                        class="invalid-feedback text-danger"></small>
+            </div>
+            <div class="form-group">
+                <div class="label-holder textCol d-flex justify-content-center">
+                    <label for="description" class="h4 mb-2">Description</label>
+                </div>
+                <input th:field="*{description}"
+                       th:errorclass="is-invalid"
+                       type="text" class="form-control" id="description" name="description"/>
+
+                <small class="invalid-feedback text-danger">Description min length must be minimum 5.</small>
+            </div>
+            <div class="form-group">
+                <div class="label-holder  textCol d-flex justify-content-center">
+                    <label for="dueDate" class="h4 mb-2">Due Date</label>
+                </div>
+                <input th:field="*{dueDate}"
+                       th:errorclass="is-invalid"
+                       type="date" class="form-control" id="dueDate" name="dueDate"/>
+                <small class="invalid-feedback text-danger">Date cannot be in the past.</small>
+            </div>
+            <div class="form-group">
+                <div class="label-holder  textCol d-flex justify-content-center">
+                    <label for="classification" class="h4 mb-2">Classification</label>
+                </div>
+                <select th:field="*{classification}"
+                        th:errorclass="is-invalid"
+                        type="text" class="form-control" id="classification" name="classification">
+                    <option value="">Select Classification</option>
+                    <option th:each="cl : ${T(bg.softuni.jira.model.entity.ClassificationName).values()}"
+                            th:text="${cl}"
+                            th:value="${cl}"
+                            th:selected="${cl} == *{classification}"></option>
+
+                </select>
+                <small class="invalid-feedback text-danger">Please select classification.</small>
+            </div>
+
+            <div class="button-holder d-flex justify-content-center">
+                <button type="submit" class="button btn-warning  mb-3" value="Register">Add Task</button>
+            </div>
+        </form>
+    </main>
+    <footer class="footer">
+        <div class="container-fluid text-center">
+            <div class="footer-background h6">
+                &copy; Spring team 2020. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</div>
+
+
+</body>
+</html>

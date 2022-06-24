@@ -38,9 +38,9 @@ public class OrderAddController {
     }
 
     @PostMapping("/orders/add")
-    public String submitRegister(@Valid OrderAddDTO orderAddDTO,
-                                 BindingResult bindingResult,
-                                 RedirectAttributes redirectAttributes) {
+    public String add(@Valid OrderAddDTO orderAddDTO,
+                      BindingResult bindingResult,
+                      RedirectAttributes redirectAttributes) {
 
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("orderAddDTO", orderAddDTO);

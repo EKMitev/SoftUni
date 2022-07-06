@@ -47,26 +47,7 @@ public class AuthController {
     }
 
     @GetMapping("/login")
-    public String login(Model model) {
+    public String login() {
         return "auth-login";
-    }
-
-    @PostMapping("/login")
-    public String login(UserLoginDTO userLoginDTO,
-                        RedirectAttributes redirectAttributes) {
-        boolean logged = this.authenticationService.login(userLoginDTO);
-
-        if (!logged) {
-            redirectAttributes.addFlashAttribute("err", true);
-            return "redirect:/users/login";
-        }
-
-        return "redirect:/";
-    }
-
-    @GetMapping("/logout")
-    public String logout() {
-        this.authenticationService.logout();
-        return "redirect:/";
     }
 }

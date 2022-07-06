@@ -2,6 +2,8 @@ package com.example.demo.models.entity;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -26,8 +28,8 @@ public class User {
     @Column(columnDefinition = "BIT")
     private boolean isActive;
 
-    @ManyToOne
-    private UserRole role;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<UserRole> roles = new ArrayList<>();
 
     @Column(name = "image_url")
     private String imageURL;
@@ -88,12 +90,12 @@ public class User {
         return this;
     }
 
-    public UserRole getRole() {
-        return role;
+    public List<UserRole> getRoles() {
+        return roles;
     }
 
-    public User setRole(UserRole role) {
-        this.role = role;
+    public User setRoles(List<UserRole> roles) {
+        this.roles = roles;
         return this;
     }
 

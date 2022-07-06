@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 public class OfferController {
@@ -46,14 +47,16 @@ public class OfferController {
     @PostMapping("/offers/add")
     public String submitOffer(@Valid AddOfferDTO addOfferModel,
                               BindingResult bindingResult,
-                              RedirectAttributes redirectAttributes) {
+                              RedirectAttributes redirectAttributes,
+                              Principal principal) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("addOfferModel", addOfferModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.addOfferModel", bindingResult);
             return "redirect:/offers/add";
         }
 
-        this.offerService.addOffer(addOfferModel);
+
+        this.offerService.addOffer(addOfferModel, principal);
         return "redirect:/offers/all";
     }
 }

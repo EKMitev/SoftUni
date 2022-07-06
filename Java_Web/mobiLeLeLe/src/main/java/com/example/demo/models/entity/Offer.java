@@ -21,7 +21,7 @@ public class Offer {
     @Column(nullable = false)
     private Engine engine;
 
-    @Column(name = "image_url")
+    @Column(name = "image_url", columnDefinition = "text")
     private String imageURL;
 
     private int mileage;
@@ -39,10 +39,10 @@ public class Offer {
 
     private Instant modified =Instant.now();
 
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private Model model;
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     private User seller;
 
     public Offer() {

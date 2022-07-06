@@ -26,7 +26,7 @@ public class AddOfferDTO {
     private Transmission transmission;
 
     @NotEmpty
-    private String imageUrl;
+    private String imageURL;
 
     @Min(1900)
     private int year;
@@ -73,12 +73,12 @@ public class AddOfferDTO {
         return this;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public String getImageURL() {
+        return imageURL;
     }
 
-    public AddOfferDTO setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public AddOfferDTO setImageURL(String imageURL) {
+        this.imageURL = imageURL;
         return this;
     }
 
